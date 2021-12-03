@@ -1,0 +1,9 @@
+<RCC>
+  <qresource prefix="Image">
+    <file>Images/sock.png</file>
+    <file>Images/user.png</file>
+    <file>Images/user_message.png</file>
+    <file>Images/Titie.jpg</file>
+    <file>Images/sky.jpeg</file>
+  </qresource>
+</RCC>
