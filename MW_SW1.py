@@ -14,13 +14,13 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Ui_Dialog(object):
     def setupUi(self, Dialog):
         Dialog.setObjectName("Dialog")
-        Dialog.resize(1048, 615)
+        Dialog.resize(1097, 615)
         Dialog.setStyleSheet("QDialog{\n"
 "background-color: rgb(255, 255, 255);\n"
 "border-radius:10px;\n"
 "}")
         self.stackedWidget = QtWidgets.QStackedWidget(Dialog)
-        self.stackedWidget.setGeometry(QtCore.QRect(150, 40, 881, 571))
+        self.stackedWidget.setGeometry(QtCore.QRect(140, 40, 961, 571))
         self.stackedWidget.setStyleSheet("QStackedWidget{\n"
 "background-color: rgb(255, 255, 255);\n"
 "border: 5px solid rgb(194, 194, 194);\n"
@@ -30,13 +30,13 @@ class Ui_Dialog(object):
         self.page_2 = QtWidgets.QWidget()
         self.page_2.setObjectName("page_2")
         self.tableWidget = QtWidgets.QTableWidget(self.page_2)
-        self.tableWidget.setGeometry(QtCore.QRect(310, 220, 531, 261))
+        self.tableWidget.setGeometry(QtCore.QRect(300, 110, 641, 381))
         font = QtGui.QFont()
         font.setPointSize(9)
         self.tableWidget.setFont(font)
         self.tableWidget.setStyleSheet("")
         self.tableWidget.setObjectName("tableWidget")
-        self.tableWidget.setColumnCount(4)
+        self.tableWidget.setColumnCount(5)
         self.tableWidget.setRowCount(1)
         item = QtWidgets.QTableWidgetItem()
         self.tableWidget.setVerticalHeaderItem(0, item)
@@ -48,58 +48,14 @@ class Ui_Dialog(object):
         self.tableWidget.setHorizontalHeaderItem(2, item)
         item = QtWidgets.QTableWidgetItem()
         self.tableWidget.setHorizontalHeaderItem(3, item)
-        self.lineEdit = QtWidgets.QLineEdit(self.page_2)
-        self.lineEdit.setGeometry(QtCore.QRect(30, 110, 231, 41))
-        self.lineEdit.setStyleSheet("background-color: rgb(255, 255, 255);\n"
-"border: 1px solid rgb(194, 194, 194);\n"
-"border-radius:10px;\n"
-"")
-        self.lineEdit.setText("")
-        self.lineEdit.setObjectName("lineEdit")
-        self.lineEdit_7 = QtWidgets.QLineEdit(self.page_2)
-        self.lineEdit_7.setGeometry(QtCore.QRect(30, 160, 231, 41))
-        self.lineEdit_7.setStyleSheet("background-color: rgb(255, 255, 255);\n"
-"border: 1px solid rgb(194, 194, 194);\n"
-"border-radius:10px;\n"
-"")
-        self.lineEdit_7.setText("")
-        self.lineEdit_7.setObjectName("lineEdit_7")
-        self.pushButton = QtWidgets.QPushButton(self.page_2)
-        self.pushButton.setGeometry(QtCore.QRect(330, 110, 191, 91))
-        self.pushButton.setStyleSheet("QPushButton::hover{\n"
-"background-color: rgb(189, 189, 189);\n"
-"}\n"
-"QPushButton::pressed{\n"
-"background-color: rgb(189, 189, 189);\n"
-"}\n"
-"QPushButton{\n"
-"background-color: rgb(122, 122, 122);\n"
-"color: rgb(255, 255, 255);\n"
-"border:None;\n"
-"border-radius:10px;\n"
-"}")
-        self.pushButton.setObjectName("pushButton")
-        self.pushButton_2 = QtWidgets.QPushButton(self.page_2)
-        self.pushButton_2.setGeometry(QtCore.QRect(630, 110, 191, 91))
-        self.pushButton_2.setStyleSheet("QPushButton::hover{\n"
-"background-color: rgb(189, 189, 189);\n"
-"}\n"
-"QPushButton::pressed{\n"
-"background-color: rgb(189, 189, 189);\n"
-"}\n"
-"QPushButton{\n"
-"background-color: rgb(122, 122, 122);\n"
-"color: rgb(255, 255, 255);\n"
-"border:None;\n"
-"border-radius:10px;\n"
-"}")
-        self.pushButton_2.setObjectName("pushButton_2")
+        item = QtWidgets.QTableWidgetItem()
+        self.tableWidget.setHorizontalHeaderItem(4, item)
         self.label_5 = QtWidgets.QLabel(self.page_2)
         self.label_5.setGeometry(QtCore.QRect(350, 30, 151, 21))
         self.label_5.setStyleSheet("font: 14pt \"华文琥珀\";")
         self.label_5.setObjectName("label_5")
         self.label_7 = QtWidgets.QLabel(self.page_2)
-        self.label_7.setGeometry(QtCore.QRect(30, 220, 231, 221))
+        self.label_7.setGeometry(QtCore.QRect(30, 110, 231, 221))
         self.label_7.setStyleSheet("background-color: rgb(222, 222, 222);\n"
 "border: 1px solid rgb(194, 194, 194);\n"
 "border-radius:10px;\n"
@@ -107,7 +63,7 @@ class Ui_Dialog(object):
         self.label_7.setText("")
         self.label_7.setObjectName("label_7")
         self.lineEdit_16 = QtWidgets.QLineEdit(self.page_2)
-        self.lineEdit_16.setGeometry(QtCore.QRect(30, 450, 231, 41))
+        self.lineEdit_16.setGeometry(QtCore.QRect(30, 360, 231, 41))
         self.lineEdit_16.setStyleSheet("background-color: rgb(255, 255, 255);\n"
 "border: 1px solid rgb(194, 194, 194);\n"
 "border-radius:10px;\n"
@@ -117,111 +73,6 @@ class Ui_Dialog(object):
         self.lineEdit_16.setPlaceholderText("")
         self.lineEdit_16.setObjectName("lineEdit_16")
         self.stackedWidget.addWidget(self.page_2)
-        self.page = QtWidgets.QWidget()
-        self.page.setObjectName("page")
-        self.pushButton_3 = QtWidgets.QPushButton(self.page)
-        self.pushButton_3.setGeometry(QtCore.QRect(150, 440, 211, 51))
-        font = QtGui.QFont()
-        font.setFamily("微软雅黑")
-        font.setBold(True)
-        font.setWeight(75)
-        self.pushButton_3.setFont(font)
-        self.pushButton_3.setAutoFillBackground(False)
-        self.pushButton_3.setStyleSheet("QPushButton::hover{\n"
-"background-color: rgb(189, 189, 189);\n"
-"}\n"
-"QPushButton::pressed{\n"
-"background-color: rgb(189, 189, 189);\n"
-"}\n"
-"QPushButton{\n"
-"background-color: rgb(122, 122, 122);\n"
-"color: rgb(255, 255, 255);\n"
-"border:None;\n"
-"border-radius:10px;\n"
-"}")
-        self.pushButton_3.setObjectName("pushButton_3")
-        self.lineEdit_2 = QtWidgets.QLineEdit(self.page)
-        self.lineEdit_2.setGeometry(QtCore.QRect(630, 70, 211, 51))
-        self.lineEdit_2.setStyleSheet("background-color: rgb(255, 255, 255);\n"
-"border: 1px solid rgb(194, 194, 194);\n"
-"border-radius:10px;\n"
-"")
-        self.lineEdit_2.setText("")
-        self.lineEdit_2.setObjectName("lineEdit_2")
-        self.lineEdit_3 = QtWidgets.QLineEdit(self.page)
-        self.lineEdit_3.setGeometry(QtCore.QRect(630, 160, 211, 51))
-        self.lineEdit_3.setStyleSheet("background-color: rgb(255, 255, 255);\n"
-"border: 1px solid rgb(194, 194, 194);\n"
-"border-radius:10px;\n"
-"")
-        self.lineEdit_3.setText("")
-        self.lineEdit_3.setObjectName("lineEdit_3")
-        self.lineEdit_4 = QtWidgets.QLineEdit(self.page)
-        self.lineEdit_4.setGeometry(QtCore.QRect(630, 250, 211, 51))
-        self.lineEdit_4.setStyleSheet("background-color: rgb(255, 255, 255);\n"
-"border: 1px solid rgb(194, 194, 194);\n"
-"border-radius:10px;\n"
-"")
-        self.lineEdit_4.setText("")
-        self.lineEdit_4.setObjectName("lineEdit_4")
-        self.lineEdit_5 = QtWidgets.QLineEdit(self.page)
-        self.lineEdit_5.setGeometry(QtCore.QRect(630, 330, 211, 51))
-        self.lineEdit_5.setStyleSheet("background-color: rgb(255, 255, 255);\n"
-"border: 1px solid rgb(194, 194, 194);\n"
-"border-radius:10px;\n"
-"")
-        self.lineEdit_5.setText("")
-        self.lineEdit_5.setObjectName("lineEdit_5")
-        self.lineEdit_6 = QtWidgets.QLineEdit(self.page)
-        self.lineEdit_6.setGeometry(QtCore.QRect(140, 360, 231, 51))
-        self.lineEdit_6.setStyleSheet("background-color: rgb(255, 255, 255);\n"
-"border: 1px solid rgb(194, 194, 194);\n"
-"border-radius:10px;\n"
-"")
-        self.lineEdit_6.setText("")
-        self.lineEdit_6.setObjectName("lineEdit_6")
-        self.pushButton_4 = QtWidgets.QPushButton(self.page)
-        self.pushButton_4.setGeometry(QtCore.QRect(630, 410, 201, 51))
-        font = QtGui.QFont()
-        font.setFamily("微软雅黑")
-        font.setBold(True)
-        font.setWeight(75)
-        self.pushButton_4.setFont(font)
-        self.pushButton_4.setAutoFillBackground(False)
-        self.pushButton_4.setStyleSheet("QPushButton::hover{\n"
-"background-color: rgb(189, 189, 189);\n"
-"}\n"
-"QPushButton::pressed{\n"
-"background-color: rgb(189, 189, 189);\n"
-"}\n"
-"QPushButton{\n"
-"background-color: rgb(122, 122, 122);\n"
-"color: rgb(255, 255, 255);\n"
-"border:None;\n"
-"border-radius:10px;\n"
-"}")
-        self.pushButton_4.setObjectName("pushButton_4")
-        self.label_6 = QtWidgets.QLabel(self.page)
-        self.label_6.setGeometry(QtCore.QRect(140, 130, 231, 221))
-        self.label_6.setStyleSheet("background-color: rgb(222, 222, 222);\n"
-"border: 1px solid rgb(194, 194, 194);\n"
-"border-radius:10px;\n"
-"")
-        self.label_6.setText("")
-        self.label_6.setObjectName("label_6")
-        self.label_2 = QtWidgets.QLabel(self.page)
-        self.label_2.setGeometry(QtCore.QRect(340, 0, 161, 41))
-        self.label_2.setStyleSheet("font: 14pt \"华文琥珀\";")
-        self.label_2.setObjectName("label_2")
-        self.lineEdit_11 = QtWidgets.QLineEdit(self.page)
-        self.lineEdit_11.setGeometry(QtCore.QRect(90, 70, 341, 41))
-        self.lineEdit_11.setStyleSheet("background-color: rgb(255, 255, 255);\n"
-"border: 1px solid rgb(194, 194, 194);\n"
-"border-radius:10px;\n"
-"padding: 10 10 10 20;")
-        self.lineEdit_11.setReadOnly(True)
-        self.lineEdit_11.setObjectName("lineEdit_11")
-        self.stackedWidget.addWidget(self.page)
         self.page_4 = QtWidgets.QWidget()
         self.page_4.setObjectName("page_4")
         self.pushButton_12 = QtWidgets.QPushButton(self.page_4)
@@ -246,37 +97,21 @@ class Ui_Dialog(object):
 "}")
         self.pushButton_12.setObjectName("pushButton_12")
         self.lineEdit_8 = QtWidgets.QLineEdit(self.page_4)
-        self.lineEdit_8.setGeometry(QtCore.QRect(530, 130, 201, 51))
+        self.lineEdit_8.setGeometry(QtCore.QRect(470, 150, 321, 51))
         self.lineEdit_8.setStyleSheet("background-color: rgb(255, 255, 255);\n"
 "border: 1px solid rgb(194, 194, 194);\n"
 "border-radius:10px;\n"
 "")
         self.lineEdit_8.setText("")
         self.lineEdit_8.setObjectName("lineEdit_8")
-        self.lineEdit_9 = QtWidgets.QLineEdit(self.page_4)
-        self.lineEdit_9.setGeometry(QtCore.QRect(530, 270, 201, 51))
-        self.lineEdit_9.setStyleSheet("background-color: rgb(255, 255, 255);\n"
-"border: 1px solid rgb(194, 194, 194);\n"
-"border-radius:10px;\n"
-"")
-        self.lineEdit_9.setText("")
-        self.lineEdit_9.setObjectName("lineEdit_9")
         self.lineEdit_12 = QtWidgets.QLineEdit(self.page_4)
-        self.lineEdit_12.setGeometry(QtCore.QRect(530, 200, 201, 51))
+        self.lineEdit_12.setGeometry(QtCore.QRect(470, 240, 321, 51))
         self.lineEdit_12.setStyleSheet("background-color: rgb(255, 255, 255);\n"
 "border: 1px solid rgb(194, 194, 194);\n"
 "border-radius:10px;\n"
 "")
         self.lineEdit_12.setText("")
         self.lineEdit_12.setObjectName("lineEdit_12")
-        self.lineEdit_13 = QtWidgets.QLineEdit(self.page_4)
-        self.lineEdit_13.setGeometry(QtCore.QRect(530, 340, 201, 51))
-        self.lineEdit_13.setStyleSheet("background-color: rgb(255, 255, 255);\n"
-"border: 1px solid rgb(194, 194, 194);\n"
-"border-radius:10px;\n"
-"")
-        self.lineEdit_13.setText("")
-        self.lineEdit_13.setObjectName("lineEdit_13")
         self.label_3 = QtWidgets.QLabel(self.page_4)
         self.label_3.setGeometry(QtCore.QRect(560, 70, 151, 21))
         self.label_3.setStyleSheet("font: 14pt \"华文琥珀\";")
@@ -355,9 +190,7 @@ class Ui_Dialog(object):
         self.label_10.raise_()
         self.pushButton_12.raise_()
         self.lineEdit_8.raise_()
-        self.lineEdit_9.raise_()
         self.lineEdit_12.raise_()
-        self.lineEdit_13.raise_()
         self.label_3.raise_()
         self.lineEdit_17.raise_()
         self.lineEdit_18.raise_()
@@ -366,74 +199,6 @@ class Ui_Dialog(object):
         self.label_9.raise_()
         self.lineEdit_20.raise_()
         self.stackedWidget.addWidget(self.page_4)
-        self.page_3 = QtWidgets.QWidget()
-        self.page_3.setObjectName("page_3")
-        self.lineEdit_10 = QtWidgets.QLineEdit(self.page_3)
-        self.lineEdit_10.setGeometry(QtCore.QRect(140, 330, 231, 51))
-        self.lineEdit_10.setStyleSheet("background-color: rgb(255, 255, 255);\n"
-"border: 1px solid rgb(194, 194, 194);\n"
-"border-radius:10px;\n"
-"")
-        self.lineEdit_10.setText("")
-        self.lineEdit_10.setReadOnly(True)
-        self.lineEdit_10.setObjectName("lineEdit_10")
-        self.pushButton_13 = QtWidgets.QPushButton(self.page_3)
-        self.pushButton_13.setGeometry(QtCore.QRect(330, 390, 231, 51))
-        font = QtGui.QFont()
-        font.setFamily("微软雅黑")
-        font.setBold(True)
-        font.setWeight(75)
-        self.pushButton_13.setFont(font)
-        self.pushButton_13.setAutoFillBackground(False)
-        self.pushButton_13.setStyleSheet("QPushButton::hover{\n"
-"background-color: rgb(189, 189, 189);\n"
-"}\n"
-"QPushButton::pressed{\n"
-"background-color: rgb(189, 189, 189);\n"
-"}\n"
-"QPushButton{\n"
-"background-color: rgb(122, 122, 122);\n"
-"color: rgb(255, 255, 255);\n"
-"border:None;\n"
-"border-radius:10px;\n"
-"}")
-        self.pushButton_13.setObjectName("pushButton_13")
-        self.lineEdit_14 = QtWidgets.QLineEdit(self.page_3)
-        self.lineEdit_14.setGeometry(QtCore.QRect(510, 140, 231, 51))
-        self.lineEdit_14.setStyleSheet("background-color: rgb(255, 255, 255);\n"
-"border: 1px solid rgb(194, 194, 194);\n"
-"border-radius:10px;\n"
-"")
-        self.lineEdit_14.setText("")
-        self.lineEdit_14.setObjectName("lineEdit_14")
-        self.lineEdit_15 = QtWidgets.QLineEdit(self.page_3)
-        self.lineEdit_15.setGeometry(QtCore.QRect(510, 210, 231, 51))
-        self.lineEdit_15.setStyleSheet("background-color: rgb(255, 255, 255);\n"
-"border: 1px solid rgb(194, 194, 194);\n"
-"border-radius:10px;\n"
-"")
-        self.lineEdit_15.setText("")
-        self.lineEdit_15.setObjectName("lineEdit_15")
-        self.label_4 = QtWidgets.QLabel(self.page_3)
-        self.label_4.setGeometry(QtCore.QRect(360, 40, 151, 21))
-        self.label_4.setStyleSheet("font: 14pt \"华文琥珀\";")
-        self.label_4.setObjectName("label_4")
-        self.lineEdit_19 = QtWidgets.QLineEdit(self.page_3)
-        self.lineEdit_19.setGeometry(QtCore.QRect(450, 310, 341, 41))
-        self.lineEdit_19.setStyleSheet("background-color: rgb(255, 255, 255);\n"
-"border: 1px solid rgb(194, 194, 194);\n"
-"border-radius:10px;\n"
-"padding: 10 10 10 70;")
-        self.lineEdit_19.setReadOnly(True)
-        self.lineEdit_19.setObjectName("lineEdit_19")
-        self.label_12 = QtWidgets.QLabel(self.page_3)
-        self.label_12.setGeometry(QtCore.QRect(140, 110, 231, 201))
-        self.label_12.setStyleSheet("border: 1px solid rgb(194, 194, 194);\n"
-"border-radius:10px;\n"
-"background-color: rgb(220, 220, 220);")
-        self.label_12.setText("")
-        self.label_12.setObjectName("label_12")
-        self.stackedWidget.addWidget(self.page_3)
         self.listWidget = QtWidgets.QListWidget(Dialog)
         self.listWidget.setGeometry(QtCore.QRect(0, 30, 121, 631))
         self.listWidget.setStyleSheet("QListView::item {\n"
@@ -460,12 +225,8 @@ class Ui_Dialog(object):
         self.listWidget.addItem(item)
         item = QtWidgets.QListWidgetItem()
         self.listWidget.addItem(item)
-        item = QtWidgets.QListWidgetItem()
-        self.listWidget.addItem(item)
-        item = QtWidgets.QListWidgetItem()
-        self.listWidget.addItem(item)
         self.graphicsView = QtWidgets.QGraphicsView(Dialog)
-        self.graphicsView.setGeometry(QtCore.QRect(0, 0, 1051, 31))
+        self.graphicsView.setGeometry(QtCore.QRect(0, 0, 1091, 31))
         self.graphicsView.setStyleSheet("    background-color: rgb(222, 222, 222);\n"
 "    font: 10pt \"微软雅黑\";\n"
 "    border: 1px solid rgb(194, 194, 194); /* 设置边框的大小，样式，颜色 */\n"
@@ -484,7 +245,7 @@ class Ui_Dialog(object):
         self.label.setStyleSheet("font: 10pt \"微软雅黑\";")
         self.label.setObjectName("label")
         self.pushButton_5 = QtWidgets.QPushButton(Dialog)
-        self.pushButton_5.setGeometry(QtCore.QRect(1010, 0, 32, 32))
+        self.pushButton_5.setGeometry(QtCore.QRect(1050, 0, 32, 32))
         self.pushButton_5.setStyleSheet("QPushButton::hover{\n"
 "background-color: rgb(218, 218, 218);\n"
 "}\n"
@@ -496,7 +257,7 @@ class Ui_Dialog(object):
 "}")
         self.pushButton_5.setObjectName("pushButton_5")
         self.pushButton_6 = QtWidgets.QPushButton(Dialog)
-        self.pushButton_6.setGeometry(QtCore.QRect(980, 0, 32, 32))
+        self.pushButton_6.setGeometry(QtCore.QRect(1010, 0, 32, 32))
         self.pushButton_6.setStyleSheet("QPushButton::hover{\n"
 "background-color: rgb(218, 218, 218);\n"
 "}\n"
@@ -521,7 +282,7 @@ class Ui_Dialog(object):
         self.label_13.raise_()
 
         self.retranslateUi(Dialog)
-        self.stackedWidget.setCurrentIndex(3)
+        self.stackedWidget.setCurrentIndex(0)
         QtCore.QMetaObject.connectSlotsByName(Dialog)
 
     def retranslateUi(self, Dialog):
@@ -537,46 +298,24 @@ class Ui_Dialog(object):
         item.setText(_translate("Dialog", "学院"))
         item = self.tableWidget.horizontalHeaderItem(3)
         item.setText(_translate("Dialog", "学号"))
-        self.lineEdit.setPlaceholderText(_translate("Dialog", "姓名"))
-        self.lineEdit_7.setPlaceholderText(_translate("Dialog", "学号"))
-        self.pushButton.setText(_translate("Dialog", "姓名/学号查询"))
-        self.pushButton_2.setText(_translate("Dialog", "人脸识别查询"))
+        item = self.tableWidget.horizontalHeaderItem(4)
+        item.setText(_translate("Dialog", "总成绩"))
         self.label_5.setText(_translate("Dialog", "学生信息查询"))
-        self.pushButton_3.setText(_translate("Dialog", "人脸采集"))
-        self.lineEdit_2.setPlaceholderText(_translate("Dialog", "姓名"))
-        self.lineEdit_3.setPlaceholderText(_translate("Dialog", "年龄"))
-        self.lineEdit_4.setPlaceholderText(_translate("Dialog", "学号"))
-        self.lineEdit_5.setPlaceholderText(_translate("Dialog", "学院"))
-        self.lineEdit_6.setPlaceholderText(_translate("Dialog", "请输入拼音/英文"))
-        self.pushButton_4.setText(_translate("Dialog", "信息录入"))
-        self.label_2.setText(_translate("Dialog", "学生信息录入"))
-        self.lineEdit_11.setPlaceholderText(_translate("Dialog", "识别时请正对摄像头,在光照好的环境下采集"))
         self.pushButton_12.setText(_translate("Dialog", "信息修改"))
         self.lineEdit_8.setPlaceholderText(_translate("Dialog", "姓名"))
-        self.lineEdit_9.setPlaceholderText(_translate("Dialog", "学院"))
         self.lineEdit_12.setPlaceholderText(_translate("Dialog", "年龄"))
-        self.lineEdit_13.setPlaceholderText(_translate("Dialog", "学号"))
         self.label_3.setText(_translate("Dialog", "对象信息修改"))
         self.lineEdit_17.setPlaceholderText(_translate("Dialog", "请输入修改对象的姓名"))
         self.lineEdit_18.setPlaceholderText(_translate("Dialog", "请输入修改对象的学号"))
         self.label_8.setText(_translate("Dialog", "修改对象查询"))
         self.pushButton_14.setText(_translate("Dialog", "查询对象"))
         self.lineEdit_20.setPlaceholderText(_translate("Dialog", "先查询对象信息之后，再进行修改"))
-        self.pushButton_13.setText(_translate("Dialog", "信息删除"))
-        self.lineEdit_14.setPlaceholderText(_translate("Dialog", "姓名"))
-        self.lineEdit_15.setPlaceholderText(_translate("Dialog", "学号"))
-        self.label_4.setText(_translate("Dialog", "学生信息删除"))
-        self.lineEdit_19.setPlaceholderText(_translate("Dialog", "请输入删除对象的姓名和学号"))
         __sortingEnabled = self.listWidget.isSortingEnabled()
         self.listWidget.setSortingEnabled(False)
         item = self.listWidget.item(0)
         item.setText(_translate("Dialog", "学生信息查询"))
         item = self.listWidget.item(1)
-        item.setText(_translate("Dialog", "学生信息录入"))
-        item = self.listWidget.item(2)
         item.setText(_translate("Dialog", "学生信息修改"))
-        item = self.listWidget.item(3)
-        item.setText(_translate("Dialog", "学生信息删除"))
         self.listWidget.setSortingEnabled(__sortingEnabled)
         self.label.setText(_translate("Dialog", "信息管理系统  |"))
         self.pushButton_5.setText(_translate("Dialog", "X"))

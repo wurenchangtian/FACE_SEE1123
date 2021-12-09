@@ -185,7 +185,10 @@ class Model(object):
         score = self.model.evaluate(dataset.X_test, dataset.Y_test, verbose=0)
         print("%s: %.2f%%" % (self.model.metrics_names[1], score[1] * 100))
 
+
+
 '''
+
 # 执行流程
 dataset = Dataset('./face_data/')     # 构建数据集
 dataset.read()          # 数据集读取
@@ -198,5 +201,3 @@ model = Model()
 model.load()
 model.evaluate(dataset)
 '''
-
-

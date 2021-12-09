@@ -6,8 +6,12 @@ from PyQt5 import Qt
 from PyQt5.QtCore import QPoint
 from PyQt5.QtGui import QPixmap, QPalette, QMouseEvent, QCursor
 from sqlalchemy import event
+# 载入窗口
 from MainWindows import *
 from MW_SW1 import *
+from MW_SW2 import *
+from MW_SW3 import *
+
 from PyQt5.QtWidgets import QApplication, QMainWindow, QDialog, QMessageBox
 import login_rc
 import sys
@@ -23,13 +27,11 @@ class parentWindow(QMainWindow):
         self.main_ui = Ui_MainWindow()
         self.main_ui.setupUi(self)
 
-
 class childWindow(QDialog):
     def __init__(self):
         QDialog.__init__(self)
-        self.child = Ui_Dialog()
+        self.child = Ui_Dialog2()
         self.child.setupUi(self)
-
 
 class Login_window(QtWidgets.QMainWindow, Ui_MainWindow):
     def __init__(self):
@@ -39,12 +41,123 @@ class Login_window(QtWidgets.QMainWindow, Ui_MainWindow):
         self.setWindowFlags(Qt.Qt.FramelessWindowHint)
         self.setAttribute(Qt.Qt.WA_TranslucentBackground)
         QPushButton:("hover{background_color: rgb(50, 170, 200)}")
+
         # 将点击事件与槽函数进行连接
         self.pushButton.clicked.connect(self.on_pushButton_enter_clicked)
+        self.pushButton_4.clicked.connect(self.FACE_SEE_admin)
+
         self.pushButton_2.clicked.connect(self.close)
         self.pushButton_3.clicked.connect(self.showMinimized)
     def on_pushButton_enter_clicked(self):
+        self.conn = pymysql.connect(
+            host='localhost',
+            user='root',
+            port=3306,
+            password='123456',
+            db='test',
+            charset='utf8',
+        )
+        # 建立连接
+        self.cur = self.conn.cursor()
+
+        name = self.lineEdit_2.text()
+        p = self.lineEdit.text()
+        sql = "SELECT * FROM 管理员 WHERE 登陆者='是'"
+        self.cur.execute(sql)
+        if not self.cur.rowcount:
+            reply = QMessageBox.warning(self, "警告", "没有查询到相关学生的信息")
+            self.conn.commit()
+            self.cur.close()
+            self.conn.close()
+        else:
+            data = self.cur.fetchall()
+            # 账号判断
+            if self.lineEdit_2.text() == data[0][0] and self.lineEdit.text() == data[0][1]:
+                child.show()
+                window.close()
+                self.conn.commit()
+                self.cur.close()
+                self.conn.close()
+            else:
+                reply = QMessageBox.warning(self, "警告", "请输入正确的用户名和密码")
+                self.conn.commit()
+                self.cur.close()
+                self.conn.close()
+
+    def FACE_SEE_admin(self):
+        FaceID2 = []
+        FaceID2.clear()
+
+        ID = use_face_modle.use_face()
+
+        for i in range(len(os.listdir('./face_data/'))):
+            if i == ID:
+                face_name = os.listdir('./face_data/')[i]
+                FaceID2.append(face_name)
+
+        self.conn = pymysql.connect(
+            host='localhost',
+            user='root',
+            port=3306,
+            password='123456',
+            db='test',
+            charset='utf8',
+        )
+        self.cur = self.conn.cursor()
+        sql = "SELECT * FROM 管理员 WHERE 人脸识别名 = " + "'" + FaceID2[0] + "'"
+        self.cur.execute(sql)
+        if not self.cur.rowcount:
+            reply = QMessageBox.warning(self, "警告", "识别错误，请重试")
+            self.conn.commit()
+            self.cur.close()
+            self.conn.close()
+        else:
+            data = self.cur.fetchall()
+            # 账号判断
+            if FaceID2[0] == data[0][3]:
+                child.show()
+                window.close()
+                self.conn.commit()
+                self.cur.close()
+                self.conn.close()
+            else:
+                reply = QMessageBox.warning(self, "警告", "识别发生错误，请重试")
+                self.conn.commit()
+                self.cur.close()
+                self.conn.close()
+
+
+    # 鼠标拖拽
+    def mousePressEvent(self, event):
+        if event.button() == Qt.Qt.LeftButton:
+            self.m_flag = True
+            self.m_Position = event.globalPos() - self.pos()  # 获取鼠标相对窗口的位置
+            event.accept()
+            self.setCursor(QtGui.QCursor(Qt.Qt.OpenHandCursor))  # 更改鼠标图标
+
+    def mouseMoveEvent(self, QMouseEvent):
+        if Qt.Qt.LeftButton and self.m_flag:
+            self.move(QMouseEvent.globalPos() - self.m_Position)  # 更改窗口位置
+            QMouseEvent.accept()
+
+    def mouseReleaseEvent(self, QMouseEvent):
+        self.m_flag = False
+        self.setCursor(QCursor(Qt.Qt.ArrowCursor))
+
+
+class student_window(QtWidgets.QMainWindow, Ui_MainWindow):
+    def __init__(self):
+        # 这里需要重载student_window，同时也包含了QtWidgets.QMainWindow的预加载项。
+        super(student_window, self).__init__()
+        self.setupUi(self)
+        self.setWindowFlags(Qt.Qt.FramelessWindowHint)
+        self.setAttribute(Qt.Qt.WA_TranslucentBackground)
+        QPushButton:("hover{background_color: rgb(50, 170, 200)}")
+        # 将点击事件与槽函数进行连接
+
+    def on_pushButton_enter_clicked(self):
         # 账号判断
+
         if self.lineEdit_2.text() == "123456" and self.lineEdit.text() == "123456":
             child.show()
             window.close()
@@ -68,7 +181,7 @@ class Login_window(QtWidgets.QMainWindow, Ui_MainWindow):
         self.setCursor(QCursor(Qt.Qt.ArrowCursor))
 
 
-class MWSW1(QtWidgets.QDialog, Ui_Dialog):
+class MWSW1(QtWidgets.QDialog, Ui_Dialog2):
     def __init__(self, parent=None):
         super(MWSW1, self).__init__(parent)
         self.setupUi(self)
@@ -80,6 +193,17 @@ class MWSW1(QtWidgets.QDialog, Ui_Dialog):
         self.setWindowFlags(Qt.Qt.FramelessWindowHint)
 
         # 将按钮和函数进行连接
+        self.pushButton.clicked.connect(self.char_find_db)
+        self.pushButton_2.clicked.connect(self.char_find_db_all)
+        self.pushButton_3.clicked.connect(self.Face_get)
+        self.pushButton_4.clicked.connect(self.change_db_admin)
+        self.pushButton_5.clicked.connect(self.close)
+        self.pushButton_6.clicked.connect(self.showMinimized)
+        self.pushButton_12.clicked.connect(self.change_db)
+        self.pushButton_13.clicked.connect(self.delete_db)
+        self.pushButton_14.clicked.connect(self.change_find_db)
+
+        '''
         self.pushButton_3.clicked.connect(self.Face_get)
         self.pushButton_4.clicked.connect(self.input_db)
         self.pushButton.clicked.connect(self.char_find_db)
@@ -89,6 +213,7 @@ class MWSW1(QtWidgets.QDialog, Ui_Dialog):
         self.pushButton_14.clicked.connect(self.change_find_db)
         self.pushButton_5.clicked.connect(self.close)
         self.pushButton_6.clicked.connect(self.showMinimized)
+        '''
     # 右侧边框控制页面切换
     def switch_stack(self):
         # 把list和stack控件连接起来，得以用list控制stack切换页面
@@ -139,6 +264,45 @@ class MWSW1(QtWidgets.QDialog, Ui_Dialog):
         self.cur.close()
         self.conn.close()
 
+    def char_find_db_all(self):
+        self.conn = pymysql.connect(
+            host='localhost',
+            user='root',
+            port=3306,
+            password='123456',
+            db='test',
+            charset='utf8',
+        )
+        self.cur = self.conn.cursor()
+        # 情况数据表
+        self.tableWidget.setRowCount(0)
+        self.tableWidget.clearContents()
+        sql = "SELECT * FROM 账号注册"
+
+        self.cur.execute(sql)
+        if not self.cur.rowcount:
+            reply = QMessageBox.warning(self, "警告", "没有查询到相关学生的信息")
+            self.conn.commit()
+            self.cur.close()
+            self.conn.close()
+        else:
+            self.conn.commit()
+            # 获取遍历得到的数据，并且储存进data中，读取后的data格式为data[][]
+            data = self.cur.fetchall()
+            # 向tableWidget插入数据
+            for j in range(len(data)):
+                mess = data[j]
+                row = self.tableWidget.rowCount()
+                self.tableWidget.insertRow(row)
+                self.tableWidget.setItem(j, 0, QtWidgets.QTableWidgetItem(str(mess[0])))
+                self.tableWidget.setItem(j, 1, QtWidgets.QTableWidgetItem(str(mess[1])))
+                self.tableWidget.setItem(j, 2, QtWidgets.QTableWidgetItem(str(mess[2])))
+                self.tableWidget.setItem(j, 3, QtWidgets.QTableWidgetItem(str(mess[3])))
+                self.tableWidget.setItem(j, 4, QtWidgets.QTableWidgetItem(str(mess[5])))
+            self.cur.close()
+            self.conn.close()
+
+
     def char_find_db(self):
         self.conn = pymysql.connect(
             host='localhost',
@@ -154,7 +318,7 @@ class MWSW1(QtWidgets.QDialog, Ui_Dialog):
         num = self.lineEdit_7.text()
 
         sql = "SELECT * FROM 账号注册 WHERE 姓名 = " + "'" + name + "'" + " AND 学号 = " + "'" + num + "'"
-
+        # 清空数据表
         self.cur.execute(sql)
         if not self.cur.rowcount:
             reply = QMessageBox.warning(self, "警告", "没有查询到相关学生的信息")
@@ -166,10 +330,12 @@ class MWSW1(QtWidgets.QDialog, Ui_Dialog):
             # 获取遍历得到的数据，并且储存进data中，读取后的data格式为data[][]
             data = self.cur.fetchall()
             # 向tableWidget插入数据
+
             self.tableWidget.setItem(0, 0, QtWidgets.QTableWidgetItem(str(data[0][0])))
             self.tableWidget.setItem(0, 1, QtWidgets.QTableWidgetItem(str(data[0][1])))
             self.tableWidget.setItem(0, 2, QtWidgets.QTableWidgetItem(str(data[0][2])))
             self.tableWidget.setItem(0, 3, QtWidgets.QTableWidgetItem(str(data[0][3])))
+            self.tableWidget.setItem(0, 4, QtWidgets.QTableWidgetItem(str(data[0][5])))
             # 在label中插入图片,并且显示查询信息
             image_path = "./face_data/" + str(data[0][4]) + "/0.jpg"
             self.label_7.setPixmap(QPixmap(image_path))
@@ -194,16 +360,22 @@ class MWSW1(QtWidgets.QDialog, Ui_Dialog):
         sql = "SELECT * FROM 账号注册 WHERE 姓名 = " + old_name + " AND 学号 = " + old_num
 
         self.cur.execute(sql)
-        self.conn.commit()
-        # 获取查询的数据
-        data = self.cur.fetchall()
-        image_path = "./face_data/" + str(data[0][4]) + "/0.jpg"
-        self.label_9.setPixmap(QPixmap(image_path))
+        if not self.cur.rowcount:
+            reply = QMessageBox.warning(self, "警告", "没有找到目标对象")
+            self.conn.commit()
+            self.cur.close()
+            self.conn.close()
+        else:
+            self.conn.commit()
+            # 获取查询的数据
+            data = self.cur.fetchall()
+            image_path = "./face_data/" + str(data[0][4]) + "/0.jpg"
+            self.label_9.setPixmap(QPixmap(image_path))
 
-        reply = QMessageBox.warning(self, "警告", "查询成功")
+            reply = QMessageBox.warning(self, "警告", "查询成功")
 
-        self.cur.close()
-        self.conn.close()
+            self.cur.close()
+            self.conn.close()
 
     def change_db(self):
         self.conn = pymysql.connect(
@@ -222,18 +394,56 @@ class MWSW1(QtWidgets.QDialog, Ui_Dialog):
         age = "'"+self.lineEdit_12.text()+"'"
         cla = "'"+self.lineEdit_9.text()+"'"
         num = "'"+self.lineEdit_13.text()+"'"
+        point = "'"+self.lineEdit_25.text()+"'"
 
         sql = "UPDATE 账号注册 SET 姓名 = " + str(name) +" , 年龄=" + str(age) +" , 学院="+\
-             str(cla)+" , 学号= " +str(num)+ " WHERE 姓名 = " + str(old_name) + " AND 学号 = " + str(old_num)
+             str(cla)+" , 学号= " +str(num) + ", 总成绩 = " + str(point) + " WHERE 姓名 = " + str(old_name) + " AND 学号 = " + str(old_num)
+
+        self.cur.execute(sql)
+        if not self.cur.rowcount:
+            reply = QMessageBox.warning(self, "警告", "没有找到目标对象")
+            self.conn.commit()
+            self.cur.close()
+            self.conn.close()
+        else:
+            self.conn.commit()
+            reply = QMessageBox.warning(self, "警告", "修改完成！")
+            self.cur.close()
+            self.conn.close()
+
+    def change_db_admin(self):
+        self.conn = pymysql.connect(
+            host='localhost',
+            user='root',
+            port=3306,
+            password='123456',
+            db='test',
+            charset='utf8',
+        )
+        self.cur = self.conn.cursor()
+
+        old_name = "'" + self.lineEdit_23.text() + "'"
+        old_num = "'" + self.lineEdit_24.text() + "'"
+
+        new_name = "'" + self.lineEdit_21.text() + "'"
+        new_num = "'" + self.lineEdit_22.text() + "'"
+        face_num = "'" + self.lineEdit_6.text() + "'"
+
+        sql = "UPDATE 管理员 SET 账号 = " + str(new_name) +" , 密码=" + str(new_num) + " , 人脸识别名 ="+\
+             str(face_num) + " WHERE 账号 = " + str(old_name) + " AND 密码 = " + str(old_num)
 
 
         self.cur.execute(sql)
-        self.conn.commit()
-
-        reply = QMessageBox.warning(self, "警告", "修改完成！")
-
-        self.cur.close()
-        self.conn.close()
+        if not self.cur.rowcount:
+            reply = QMessageBox.warning(self, "警告", "修改失败，请重新检查输入的用户名和密码")
+            self.conn.commit()
+            self.cur.close()
+            self.conn.close()
+        else:
+            reply = QMessageBox.warning(self, "警告", "修改完成！")
+            self.conn.commit()
+            self.cur.close()
+            self.conn.close()
 
     def delete_db(self):
         self.conn = pymysql.connect(
@@ -282,46 +492,7 @@ class MWSW1(QtWidgets.QDialog, Ui_Dialog):
                 self.cur1.close()
                 self.conn.close()
 
-    def FACE_SEE(self):
-        ID=use_face_modle.use_face()
-        reply = QMessageBox.warning(self, "警告", str(ID))
 
-        for i in range(len(os.listdir('./face_data/'))):
-            if i == int(ID):
-                face_name = os.listdir('./face_data/')[i]
-                reply = QMessageBox.warning(self, "警告", face_name)
-                image_path = "./face_data/" + os.listdir('./face_data/')[i] + "/0.jpg"
-                self.label_7.setPixmap(QPixmap(image_path))
-                self.lineEdit_16.setText(face_name)
-
-            self.conn = pymysql.connect(
-                host='localhost',
-                user='root',
-                port=3306,
-                password='123456',
-                db='test',
-                charset='utf8',
-            )
-            self.cur = self.conn.cursor()
-            sql = "SELECT * FROM 账号注册 WHERE 人脸识别名 = " + "'" + face_name + "'"
-
-            self.cur.execute(sql)
-            if not self.cur.rowcount:
-                reply = QMessageBox.warning(self, "警告", "学生识别失败")
-                self.conn.commit()
-                self.cur.close()
-                self.conn.close()
-            # 获取遍历得到的数据，并且储存进data中，读取后的data格式为data[][]
-            else:
-                data = self.cur.fetchall()
-                # 向tableWidget插入数据
-                self.tableWidget.setItem(0, 0, QtWidgets.QTableWidgetItem(str(data[0][0])))
-                self.tableWidget.setItem(0, 1, QtWidgets.QTableWidgetItem(str(data[0][1])))
-                self.tableWidget.setItem(0, 2, QtWidgets.QTableWidgetItem(str(data[0][2])))
-                self.tableWidget.setItem(0, 3, QtWidgets.QTableWidgetItem(str(data[0][3])))
-                self.conn.commit()
-                self.cur.close()
-                self.conn.close()
 
 
 

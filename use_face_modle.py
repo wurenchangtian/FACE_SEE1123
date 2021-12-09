@@ -12,7 +12,7 @@ def use_face():
     model = Model()
     model.load()
 
-    FaceID1=[]
+    FaceID1 = []
     FaceID1.clear()
 
     # 框住人脸的矩形边框颜色
@@ -22,8 +22,7 @@ def use_face():
     cap = cv2.VideoCapture(0, cv2.CAP_DSHOW)
 
     # 人脸识别分类器本地存储路径
-    cascade_path = "haarcacade_frontalface_defasult.xml"
-    print("123")
+    cascade_path = "haarcascade_frontalface_default.xml"
     # 循环检测识别人脸
     while True:
         ret, frame = cap.read()  # 读取一帧视频
@@ -35,21 +34,19 @@ def use_face():
             continue
         # 使用人脸识别分类器，读入分类器
         cascade = cv2.CascadeClassifier(cascade_path)
-        print("456")
         # 利用分类器识别出哪个区域为人脸
         faceRects = cascade.detectMultiScale(frame_gray, scaleFactor=1.2, minNeighbors=3, minSize=(32, 32))
-        print("789")
+
+
         if len(faceRects) > 0:
             for faceRect in faceRects:
                 x, y, w, h = faceRect
                 # 截取脸部图像提交给模型识别这是谁
                 image = frame[y - 10: y + h + 10, x - 10: x + w + 10]
-                print("666")
                 faceID = model.predict(image)
                 print("faceID", faceID)
-                print("545")
                 FaceID1.append(faceID)
-               # 通过数字标记提供进行识别
+                # 通过数字标记提供进行识别
                 for i in range(len(os.listdir('./face_data/'))):
                     if i == faceID:
                         cv2.rectangle(frame, (x - 10, y - 10), (x + w + 10, y + h + 10), color, thickness=2)
@@ -60,7 +57,6 @@ def use_face():
                                  1,  # 字号
                                  (255, 0, 255),  # 颜色
                                  2)  # 字的线宽
-                print("1123")
         cv2.imshow("Face Recognition", frame)
         
         # 等待10毫秒看是否有按键输入

@@ -54,7 +54,7 @@ def CatchPICFromVideo(window_name, camera_idx, catch_pic_num, path_name):
     cap.release()
     cv2.destroyAllWindows()
 
-# CatchPICFromVideo('DP window', 0, 100, './face_data/10086')
+
 def CreateFolder(path):
     #去除首位空格
     del_path_space = path.strip()
